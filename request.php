@@ -5,13 +5,6 @@ $uri = $_POST['uri'];
 $method = $_POST['method'];
 $payload = $_POST['payload'];
 
-#$uri = "http://fingertips-server-dev/users/?format=json";
-#$uri = "http://google.pt";
-#$method = "GET";
-#$payload = "username=pcandeias";
-#
-
-
 // Prepare CURL
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $uri);
@@ -35,6 +28,22 @@ elseif ($method == 'POST') {
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
     $out = curl_exec($ch);
+}
+
+// PUT request
+elseif ($method == "PUT") {
+
+    $post = explode("&", $payload);
+    $put = array();
+    foreach ($post as $pair) {
+        $kv = explode("=", $pair);
+        $put[array_shift($kv)] = implode("=", $kv);
+    }
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($put));
+    
+    $out = curl_exec($ch);
+
 }
 
 
