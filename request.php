@@ -46,6 +46,13 @@ elseif ($method == "PUT") {
 
 }
 
+// DELETE request
+# Warning: this completely supresses the request body
+elseif ($method == "DELETE") {
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+    $out = curl_exec($ch);
+}
+
 
 if (!empty($out)) {
     header('HTTP/1.1 '.curl_getinfo($ch, CURLINFO_HTTP_CODE));
