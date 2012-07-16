@@ -19,6 +19,7 @@ form div {
 form textarea {
     width: 80%;
     height: 15em;
+    border: 1px solid #999;
 }
 
 #method label {
@@ -37,9 +38,9 @@ form textarea {
 }
 #responseData {
     background: none;
-    border: none;
     font-family: courier;
     color: #000;
     width: 100%;
     height: 50em;
+    margin-bottom: 2em;
 }
